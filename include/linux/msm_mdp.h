@@ -185,6 +185,23 @@ enum {
 #define MDP_FB_PAGE_PROTECTION_INVALID           (5)
 #define MDP_NUM_FB_PAGE_PROTECTION_VALUES        (5)
 
+#define MDP_MAX_FENCE_FD        10
+struct mdp_buf_fence {
+	uint32_t flags;
+	uint32_t acq_fen_fd_cnt;
+	int acq_fen_fd[MDP_MAX_FENCE_FD];
+	int rel_fen_fd[MDP_MAX_FENCE_FD];
+};
+
+#define MDP_DISPLAY_COMMIT_OVERLAY 0x00000001
+
+struct mdp_display_commit {
+	uint32_t flags;
+	uint32_t wait_for_finish;
+	struct fb_var_screeninfo var;
+	struct mdp_buf_fence buf_fence;
+};
+
 struct mdp_rect {
 	uint32_t x;
 	uint32_t y;
